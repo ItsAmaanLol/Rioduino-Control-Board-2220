@@ -1,0 +1,23 @@
+#include <Wire.h> // The Arduino/RIODuino I2C library.
+int DT = 500; // The variable that represents a period of delay, "DT".
+int i; // The variable that will be printed onto the serial monitor for our testing purposes.
+
+void setup() { // The setup code.
+
+  Wire.begin(); // Joins the Arduino/RIODuino to the I2C Bus as the master device (assigning an address is optional for the master device (leave area in parenthesis blank)).
+  Serial.begin(9600); // Starts the serial monitor.
+  
+}
+
+
+void loop() { // The looping code.
+
+  Wire.requestFrom(1, 10); // Requests 10 bytes of data from device #1 (our slave device in this case (the ROBORIO)).
+  
+  if (Wire.available()) { // If the required amount of bytes of data (10) is sent (could be less than 10), then...
+  Serial.println(i); // Print variable "i" onto the serial monitor in the following consecutive line.
+  i++; // Increase the value of variable "i" by 1.
+  delay(DT); // Delay by 500 milliseconds (in this case assigned by the variable "DT") before looping right back to the top of the "void loop()" section.
+  
+}
+
